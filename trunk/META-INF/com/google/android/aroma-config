@@ -1,0 +1,252 @@
+### LICENSE:
+#
+# Copyright (C) 2011 Ahmad Amarullah ( http://amarullz.com/ )
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+### FILE INFO:
+#
+# AROMA Installer 2.70RC2 - AROMA Installer Test Script Configuration
+#       (c) 2011-2014 by Ahmad Amarullah
+#           amarullz - xda-developers
+#           http://www.amarullz.com/
+#
+#       Binary Version  : 2.70RC2
+#       Binary Codename : FLAMBOYAN
+#
+### INFO:
+#
+# * AROMA Resource Dir  = META-INF/com/google/android/aroma
+#
+# * AROMA Temporary Dir = /tmp/aroma/
+#
+# * About Icon          = @alert - show <AROMA Resource Dir>/@alert.png
+#                         or if theme used it will find <themedir>/icon.alert.png
+#                         you can still access it via "@alert"
+#
+# * dp                  = Device Pixelate. WVGA/QHD = 3, HVGA = 2.
+#                         dp calculated with = round(min(width,height) / 160)
+#
+
+ini_set("rom_name",             "xpirt modPack");
+ini_set("rom_version",          "#1");
+ini_set("rom_author",           "xpirt, lyapota");
+ini_set("rom_device",           "Moto G 2013 - GPE");
+ini_set("rom_date",             "January 19, 2015");
+
+ini_set("force_colorspace","rgba");
+
+fontresload( "0", "ttf/DroidSans.ttf", "12" );
+fontresload( "1", "ttf/DroidSans.ttf", "18" );
+
+theme("sense");
+
+###################################################################################################################
+#
+# STEP 1 - SHOW MOD INFORMATION
+#
+viewbox(
+  #-- Title
+  #-- Text
+    "Welcome",
+    "\n\n\n\n\n"+
+    "You're about to flash:\n"+
+    ini_get("rom_name") + " for " + ini_get("rom_device") +  "\n\n\n"+
+    "  VERSION\t: <b><#selectbg_g>"+ini_get("rom_version")+"</#></b>\n"+
+    "  UPDATED\t: <b><#selectbg_g>"+ini_get("rom_date")+"</#></b>\n\n\n"+
+    "Press <b>Next</b> to continue the installation...",
+  #-- Icon
+    "@welcome"
+);
+
+###################################################################################################################
+#
+# STEP 2 - TERMS OF USE AND REQUIREMENTS
+#
+agreebox(
+  #-- Title
+    "Important notes!",
+  
+  #-- Subtitle / Description
+    "",
+  
+  #-- Icon
+    "@agreement",
+  
+  #-- Text Content ( Read from <AROMA Resource Dir>/read_me.txt )
+    resread("gnu.txt"),
+  
+  #-- Checkbox Text
+    "I agree with these Terms of Use.",
+  
+  #-- Unchecked Alert Message
+    "You need to agree with the Terms of Use..."
+);
+
+if
+  confirm(
+    # Arg 1
+    "Requirements!",
+
+    # Arg 2
+    resread("read_me.txt"),
+
+    # Arg 3
+    "@confirm",
+
+    # Arg 4
+    "Yes",
+
+    # Arg 5
+    "No"
+
+  ) == "no"
+
+then
+  exit();
+endif;
+
+###################################################################################################################
+#
+# STEP 3 - SELECT APPLICATIONS
+#
+
+menubox(
+  "How to flash",
+  "2 and 3 actually for first flash only",
+  "@apps",
+  "way.prop",
+
+  "Next time","Choose if this isn't the first time you flash it","@lux",
+  "Rooted Stock Moto G 2013 GPE","Select if You flash this modPack first time","@blue",
+  "Pure Stock Moto G 2013 GPE (without root)","Select if You flash this modPack first time","@default"
+);
+
+#wich way flash modPack
+if prop("way.prop","selected")=="1" then
+    writetmpfile("prep.prop", "item.0.1=0\nitem.0.2=0\nitem.0.3=0\n");
+endif;
+
+if prop("way.prop","selected")=="2" then
+    checkbox(
+      "complete it",
+      "please indicate:",
+      "@apps",
+      "prep.prop",
+      
+      "install busybox","",0,
+      "install init.d support","",1,
+      "install root","",0,
+      "wipe caches","",0
+    );
+endif;
+
+if prop("way.prop","selected")=="3" then
+    writetmpfile("prep.prop", "item.0.1=1\nitem.0.2=1\nitem.0.3=1\nitem.0.4=1\n");
+endif;
+
+#Select mods
+checkbox(
+  "presets",
+  "please indicate:",
+  "@apps",
+  "common.prop",
+  
+  "longpress back to kill","longpress back key to kill app",1,
+  "advanced power menu","reboot,recovery,hot-reboot,safemode,bootloader",1,
+  "menu navbar persist","persistent menu button in navbar",0,
+  "show battery %","percentage inside or beside battery",1,
+  "build.prop tweaks","various build.prop tweaks",0,
+  "knock knock to sleep","double tab status bar to sleep",1,
+  "hide search bar in recents","hide search bar from recent apps",1,
+  "disable safe volume", "disable safe volume warning",0,
+  "right corner pulldown qs", "right status bar corner quick pulldown",1,
+  "network stats statusbar", "status bar network stats ingoing/outgoing",0
+);
+
+
+###################################################################################################################
+#
+# STEP 4 - SETUP INSTALLATION
+#
+
+# battery %
+if prop("common.prop","item.0.4")=="1" then
+  selectbox(
+    "battery %",
+    "please indicate:",
+    "@sysmod",
+    "batt.prop",
+    
+    "stock","no %",1,
+    "inside","% inside batt icon",0,
+    "beside","% beside batt icon",0
+  );
+else
+    writetmpfile("batt.prop", "selected.0=1\n");
+endif;
+
+#select build.prop tweaks
+if prop("common.prop","item.0.5")=="1" then
+  checkbox(
+    "build.prop tweaks",
+    "please indicate:",
+    "@sysmod",
+    "build.prop",
+    
+    "disable play sound on mount","",1,
+    "disable adb notifies","",1,
+    "disable mtp notifies","",1,
+    "disable usb notifies","",1
+  );
+endif;
+
+
+###################################################################################################################
+#
+# STEP 5 - INSTALLING
+#
+viewbox(
+  "ready to install",
+  "all informations has been collected for installation.\n\n"+
+  "press <b>Next</b> to start the installation..."+
+  "if you want to review or change any of your installation settings, press <b>Back</b>.",
+  "@info"
+);
+
+setvar("retstatus",
+install(
+  "installing",
+  "installing <b>" + ini_get("rom_name") + " " + ini_get("rom_version") + "</b>" +
+  "...\nplease wait until it's finished...",
+  "@install")
+);
+
+#set Next text fo Finish
+ini_set("text_next", "Finish");
+
+if getvar("retstatus")=="0" then
+      viewbox(
+        "installation Completed",
+        "<#080>Congratulations...</#>\n\n"+
+        ini_get("rom_name") + " " + ini_get("rom_version") + " has been installed successfully.\n\n"+
+        "tap Finish, and Reboot your device.\n\nThanks.",
+        "@info"
+      );
+else
+      viewbox(
+           "installation failed",
+           "\n\ninstaller status: "+ getvar("retstatus"),
+           "@alert");
+endif;
+
