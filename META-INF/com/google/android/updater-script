@@ -1,0 +1,296 @@
+# ===========================================
+# updater-script for xpirt-modPack
+# ===========================================
+
+set_progress(0.01);
+
+ui_print("@init");
+
+    assert(unmount("/data") || ui_print("(unmounted Data partition..)"));
+    assert(unmount("/system") || ui_print("(unmounted System partition..)"));
+
+    ui_print("|-> mount data");
+        run_program("/sbin/busybox", "mount", "/data");
+
+    ui_print("|-> mount system");
+        run_program("/sbin/busybox", "mount", "/system");
+
+
+#write hacked linker on the update session
+    package_extract_dir("common/pie_hack", "/system");
+    set_perm(0, 2000, 0755, "/system/bin/linker");
+
+
+set_progress(0.05);
+############################Prepare###########################
+show_progress(0.50, "-5000");
+
+
+if
+    file_getprop("/tmp/aroma-data/way.prop","selected") != "1"
+then
+    ui_print("@prepare");
+
+    if 
+        file_getprop("/tmp/aroma-data/prep.prop","item.0.1") == "1"
+    then
+       ui_print("|-> installing busybox");
+           package_extract_dir("common/!_first_time/busybox", "/system");
+           set_perm(0, 1000, 0755, "/system/xbin/busybox");
+           run_program("/system/xbin/busybox", "--install", "-s", "/system/xbin");
+    endif; 
+
+    if 
+        file_getprop("/tmp/aroma-data/prep.prop","item.0.2") == "1"
+    then
+       ui_print("|-> enabling init.d support");
+           package_extract_dir("common/!_first_time/init_d", "/system");
+    endif; 
+
+    if 
+        file_getprop("/tmp/aroma-data/prep.prop","item.0.3") == "1"
+    then
+       ui_print("|-> rooting");
+           package_extract_dir("common/!_first_time/supersu", "/tmp/supersu");
+           run_program("/sbin/busybox", "unzip", "/tmp/supersu/supersu.zip", "META-INF/com/google/android/*", "-d", "/tmp/supersu");
+           run_program("/sbin/busybox", "sh", "/tmp/supersu/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/supersu/supersu.zip");
+
+           run_program("/sbin/mount", "/data");
+           run_program("/sbin/mount", "/system");
+    endif; 
+    
+    ui_print("|-> removing stock OAT blobs");
+        delete_recursive("/system/framework/arm");
+
+    ui_print("|-> installing dev framework");
+	package_extract_dir("common/!_first_time/prep2dev", "/system");
+
+    if 
+        file_getprop("/tmp/aroma-data/prep.prop","item.0.4") == "1"
+    then
+        ui_print("|-> erasing Cache Partition");
+            format("ext4", "EMMC", "/dev/block/platform/msm_sdcc.1/by-name/cache", "0", "/cache");
+
+        ui_print("|-> erasing Dalvik-Cache");
+            delete_recursive("/data/dalvik-cache");
+            delete_recursive("/data/resource-cache");
+    endif; 
+
+endif;
+
+ui_print("@install");
+
+############################Install###########################
+
+    ui_print("|-> extract scripts");
+        package_extract_dir("common/aroma", "/tmp");
+        set_perm_recursive(0, 0, 0755, 0755, "/tmp");
+    ui_print("|-> installing system");
+	package_extract_dir("system", "/system");
+
+
+set_progress(0.55);
+############################Setup##############################
+show_progress(0.35, "-6000");
+
+
+ui_print("@setup");
+
+#####################
+## system tweaks
+#####################
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.1") == "1"
+then
+    ui_print("|-> longpress backkey app    APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_backkey_kill", "1");
+else
+    ui_print("|-> longpress backkey app    DEACTIVATED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_backkey_kill", "0");
+endif;
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.2") == "1"
+then
+    ui_print("|-> advanced power menu      APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_apm", "1");
+else
+    ui_print("|-> advanced power menu      DEACTIVATED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_apm", "0");
+endif;
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.3") == "1"
+then
+    ui_print("|-> menu navbar persist     APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_show_menu_persist", "1");
+else
+    ui_print("|-> menu navbar persist     DEACTIVATED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_show_menu_persist", "0");
+endif;
+
+
+#####################
+## battery %
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/batt.prop","selected.0") == "1"
+then
+    ui_print("|-> stock battery           APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "status_bar_show_battery_percent", "0");
+endif;
+if
+    file_getprop("/tmp/aroma-data/batt.prop","selected.0") == "2"
+then
+    ui_print("|-> inside battery %        APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "status_bar_show_battery_percent", "1");
+endif;
+if
+    file_getprop("/tmp/aroma-data/batt.prop","selected.0") == "3"
+then
+    ui_print("|-> beside battery %        APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "status_bar_show_battery_percent", "2");
+endif;
+
+
+#####################
+## build prop tweaks
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.5") == "1"
+then
+   if
+       file_getprop("/tmp/aroma-data/build.prop","item.0.1") == "1"
+   then
+       ui_print("|-> sound on mount           DISABLED");
+           run_program("/tmp/set_build_prop.sh", "persist.service.mount.playsnd", "0");
+   else
+       ui_print("|-> sound on mount           ENABLED");
+           run_program("/tmp/set_build_prop.sh", "persist.service.mount.playsnd", "1");
+   endif;
+
+   if
+       file_getprop("/tmp/aroma-data/build.prop","item.0.2") == "1"
+   then
+       ui_print("|-> adb notificaton          DISABLED");
+           run_program("/tmp/set_build_prop.sh", "persist.adb.notify", "0");
+   else
+       ui_print("|-> adb notificaton          ENABLED");
+           run_program("/tmp/set_build_prop.sh", "persist.adb.notify", "1");
+   endif;
+
+   if
+       file_getprop("/tmp/aroma-data/build.prop","item.0.3") == "1"
+   then
+       ui_print("|-> mtp notificaton          DISABLED");
+           run_program("/tmp/set_build_prop.sh", "persist.mtp.notify", "0");
+   else
+       ui_print("|-> mtp notificaton          ENABLED");
+           run_program("/tmp/set_build_prop.sh", "persist.mtp.notify", "1");
+   endif;
+
+   if
+       file_getprop("/tmp/aroma-data/build.prop","item.0.4") == "1"
+   then
+       ui_print("|-> usb notificaton          DISABLED");
+           run_program("/tmp/set_build_prop.sh", "persist.usb.notify", "0");
+   else
+       ui_print("|-> usb notificaton          ENABLED");
+           run_program("/tmp/set_build_prop.sh", "persist.usb.notify", "1");
+   endif;
+endif;
+
+
+#####################
+## knock 2 sleep
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.6") == "1"
+then
+    ui_print("|-> double tab status bar to sleep        APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_knock_knock_sleep", "1");
+else
+    ui_print("|-> double tab status bar to sleep        DEACTIVATED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_knock_knock_sleep", "0");
+endif;
+
+
+#####################
+## hide search bar in recents
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.7") == "1"
+then
+    ui_print("|-> hide search bar in recents  APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_hide_recents_search", "1");
+else
+    ui_print("|-> hide search bar in recents  DEACTIVATED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_hide_recents_search", "0");
+endif;
+
+
+#####################
+## disable safe volume
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.8") == "1"
+then
+    ui_print("|-> disable safe volume     APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_disable_safe_volume", "1");
+else
+    ui_print("|-> disable safe volume     DISABLED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_disable_safe_volume", "0");
+endif;
+
+
+#####################
+## right corner pulldown qs
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.9") == "1"
+then
+    ui_print("|-> corner pulldown qs      APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_qs_pulldown", "1");
+else
+    ui_print("|-> corner pulldown qs      DISABLED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_qs_pulldown", "0");
+endif;
+
+
+#####################
+## network stats status bar
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.10") == "1"
+then
+    ui_print("|-> speed meter status bar      APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "status_bar_network_stats", "1");
+else
+    ui_print("|-> speed meter status bar      DISABLED");
+    	run_program("/tmp/tweaks.sh", "sys", "status_bar_network_stats", "0");
+endif;
+
+set_progress(0.90);
+###########################Finish############################
+show_progress(0.10, "-2000");
+
+#restore original linker    
+    package_extract_dir("common/pie_stock", "/system");
+    set_perm(0, 2000, 0755, "/system/bin/linker");
+
+ui_print("");
+ui_print("@installation completed!");
+run_program("/sbin/sleep", "2");
+
+###########################Unmounting###########################
+unmount("/data");
+unmount("/system");
+
+set_progress(1.0);
