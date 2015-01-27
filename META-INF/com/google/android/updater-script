@@ -361,6 +361,22 @@ then
 endif;
 
 
+#####################
+## increase volume steps
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.15") == "1"
+then
+    ui_print("|-> increase volume steps     APPLIED");
+    run_program("/tmp/tweaks.sh", "sys", "tweaks_volume_control", "1");
+else
+    ui_print("|-> increase volume steps     DEACTIVATED");
+    run_program("/tmp/tweaks.sh", "sys", "tweaks_volume_control", "0");
+
+endif;
+
+
 set_progress(0.90);
 ###########################Finish############################
 show_progress(0.10, "-2000");

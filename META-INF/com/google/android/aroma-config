@@ -172,7 +172,9 @@ checkbox(
   "disable safe volume", "disable safe volume warning",0,
   "right corner pulldown qs", "right status bar corner quick pulldown",1,
   "network stats statusbar", "status bar network stats ingoing/outgoing",0,
-  "change navbar size","</b>submenu...</b>", 0
+  "change navbar size","</b>submenu...</b>", 0,
+  "display DPI", "</b>submenu...</b>", 0,
+  "increase volume steps", "increase volume steps for media", 1
 );
 
 
@@ -182,7 +184,7 @@ checkbox(
 #
 
 # navbar size
-if prop("common.prop","item.0.5")=="1" then
+if prop("common.prop","item.0.11")=="1" then
   selectbox(
     "navbar size",
     "please indicate:",
@@ -199,7 +201,7 @@ else
 endif;
 
 #select dpi
-if prop("common.prop","item.0.13")=="1" then
+if prop("common.prop","item.0.12")=="1" then
   selectbox(
     "display dpi",
     "please indicate:",
