@@ -171,7 +171,8 @@ checkbox(
   "hide search bar in recents","hide search bar from recent apps",1,
   "disable safe volume", "disable safe volume warning",0,
   "right corner pulldown qs", "right status bar corner quick pulldown",1,
-  "network stats statusbar", "status bar network stats ingoing/outgoing",0
+  "network stats statusbar", "status bar network stats ingoing/outgoing",0,
+  "change navbar size","</b>submenu...</b>", 0
 );
 
 
@@ -179,6 +180,44 @@ checkbox(
 #
 # STEP 4 - SETUP INSTALLATION
 #
+
+# navbar size
+if prop("common.prop","item.0.5")=="1" then
+  selectbox(
+    "navbar size",
+    "please indicate:",
+    "@sysmod",
+    "navbar.prop",
+    
+    "stock","48 dpi",1,
+    "small","42 dpi",0,
+    "smaller","36 dpi",0,
+    "smallest","32 dpi",0
+  );
+else
+    writetmpfile("navbar.prop", "selected.0=1\n");
+endif;
+
+#select dpi
+if prop("common.prop","item.0.13")=="1" then
+  selectbox(
+    "display dpi",
+    "please indicate:",
+    "icons/personalize",
+    "dpi.prop",
+    
+    "480","stock",1,
+    "440","",0,
+    "420","",0,
+    "400","",0,
+    "370","",0,
+    "340","",0,
+    "300","",0,
+    "200","",0
+  );
+else
+    writetmpfile("dpi.prop", "selected.0=1\n");
+endif;
 
 # battery %
 if prop("common.prop","item.0.4")=="1" then

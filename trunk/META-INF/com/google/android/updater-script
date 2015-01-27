@@ -131,6 +131,35 @@ endif;
 
 
 #####################
+## navigation bar
+#####################
+if
+    file_getprop("/tmp/aroma-data/navbar.prop","selected.0") == "2"
+then
+    ui_print("|-> navbar small size       APPLIED");
+	package_extract_dir("additions/navbar_42", "/tmp");
+    	run_program("/tmp/res_patch.sh", "/system/framework/framework-res.apk");
+        set_perm(0, 0, 0644, "/system/framework/framework-res.apk");
+endif;
+if
+    file_getprop("/tmp/aroma-data/navbar.prop","selected.0") == "3"
+then
+    ui_print("|-> navbar smaller size     APPLIED");
+	package_extract_dir("additions/navbar_36", "/tmp");
+    	run_program("/tmp/res_patch.sh", "/system/framework/framework-res.apk");
+        set_perm(0, 0, 0644, "/system/framework/framework-res.apk");
+endif;
+if
+    file_getprop("/tmp/aroma-data/navbar.prop","selected.0") == "4"
+then
+    ui_print("|-> navbar smallest size    APPLIED");
+	package_extract_dir("additions/navbar_32", "/tmp");
+    	run_program("/tmp/res_patch.sh", "/system/framework/framework-res.apk");
+        set_perm(0, 0, 0644, "/system/framework/framework-res.apk");
+endif;
+
+
+#####################
 ## battery %
 #####################
 
@@ -276,6 +305,61 @@ else
     ui_print("|-> speed meter status bar      DISABLED");
     	run_program("/tmp/tweaks.sh", "sys", "status_bar_network_stats", "0");
 endif;
+
+
+#####################
+## display DPI
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "1" 
+then
+    ui_print("|-> stock DPI                 APPLIED");
+           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "480");
+endif;
+if
+    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "2"
+then
+    ui_print("|-> 440 DPI                   APPLIED");
+           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "440");
+endif;
+if
+    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "3"
+then
+    ui_print("|-> 420 DPI                   APPLIED");
+           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "420");
+endif;
+if
+    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "4"
+then
+    ui_print("|-> 400 DPI                   APPLIED");
+           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "400");
+endif;
+if
+    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "5"
+then
+    ui_print("|-> 370 DPI                   APPLIED");
+           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "370");
+endif;
+if
+    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "6"
+then
+    ui_print("|-> 340 DPI                   APPLIED");
+           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "340");
+endif;
+if
+    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "7"
+then
+    ui_print("|-> 300 DPI                   APPLIED");
+           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "300");
+endif;
+if
+    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "8"
+then
+    ui_print("|-> 200 DPI                   APPLIED");
+           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "200");
+endif;
+
 
 set_progress(0.90);
 ###########################Finish############################
