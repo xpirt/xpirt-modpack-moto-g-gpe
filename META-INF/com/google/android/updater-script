@@ -263,6 +263,19 @@ endif;
 
 
 #####################
+## centered clock
+#####################
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.14") == "1"
+then
+    ui_print("|-> centered clock          APPLIED");
+	package_extract_dir("additions/clock_center", "/tmp");
+    	run_program("/tmp/res_patch.sh", "/system/priv-app/SystemUI/SystemUI.apk");
+        set_perm(0, 0, 0644, "/system/priv-app/SystemUI/SystemUI.apk");
+endif;
+
+
+#####################
 ## disable safe volume
 #####################
 
@@ -315,49 +328,49 @@ if
     file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "1" 
 then
     ui_print("|-> stock DPI                 APPLIED");
-           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "480");
+           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "320");
 endif;
 if
     file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "2"
-then
-    ui_print("|-> 440 DPI                   APPLIED");
-           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "440");
-endif;
-if
-    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "3"
-then
-    ui_print("|-> 420 DPI                   APPLIED");
-           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "420");
-endif;
-if
-    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "4"
-then
-    ui_print("|-> 400 DPI                   APPLIED");
-           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "400");
-endif;
-if
-    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "5"
-then
-    ui_print("|-> 370 DPI                   APPLIED");
-           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "370");
-endif;
-if
-    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "6"
-then
-    ui_print("|-> 340 DPI                   APPLIED");
-           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "340");
-endif;
-if
-    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "7"
 then
     ui_print("|-> 300 DPI                   APPLIED");
            run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "300");
 endif;
 if
-    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "8"
+    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "3"
+then
+    ui_print("|-> 280 DPI                   APPLIED");
+           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "280");
+endif;
+if
+    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "4"
+then
+    ui_print("|-> 260 DPI                   APPLIED");
+           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "260");
+endif;
+if
+    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "5"
+then
+    ui_print("|-> 240 DPI                   APPLIED");
+           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "240");
+endif;
+if
+    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "6"
+then
+    ui_print("|-> 220 DPI                   APPLIED");
+           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "220");
+endif;
+if
+    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "7"
 then
     ui_print("|-> 200 DPI                   APPLIED");
            run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "200");
+endif;
+if
+    file_getprop("/tmp/aroma-data/dpi.prop","selected.0") == "8"
+then
+    ui_print("|-> 180 DPI                   APPLIED");
+           run_program("/tmp/set_build_prop.sh", "ro.sf.lcd_density", "180");
 endif;
 
 
