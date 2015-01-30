@@ -263,6 +263,21 @@ endif;
 
 
 #####################
+## keyboard volume control
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.15") == "1"
+then
+    ui_print("|-> keyboard volume control  		APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_keyboard_volume_control", "1");
+else
+    ui_print("|-> keyboard volume control  		DEACTIVATED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_keyboard_volume_control", "0");
+endif;
+
+
+#####################
 ## centered clock
 #####################
 if

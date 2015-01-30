@@ -175,7 +175,8 @@ checkbox(
   "change navbar size","</b>submenu...</b>",0,
   "display DPI", "</b>submenu...</b>",0,
   "increase volume steps", "increase volume steps for media",1,
-  "centered clock", "center clock in status bar",0
+  "centered clock", "center clock in status bar",0,
+  "keyboard volume control", "keyboard left and right with volume keys",0
 );
 
 
