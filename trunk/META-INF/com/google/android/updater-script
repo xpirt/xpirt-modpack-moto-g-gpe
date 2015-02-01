@@ -82,6 +82,8 @@ ui_print("@install");
 
 ############################Install###########################
 
+    delete("/system/etc/init.d/50volkey");
+
     ui_print("|-> extract scripts");
         package_extract_dir("common/aroma", "/tmp");
         set_perm_recursive(0, 0, 0755, 0755, "/tmp");
@@ -99,6 +101,7 @@ ui_print("@setup");
 #####################
 ## system tweaks
 #####################
+
 if
     file_getprop("/tmp/aroma-data/common.prop","item.0.1") == "1"
 then
@@ -228,6 +231,44 @@ then
    else
        ui_print("|-> usb notificaton          ENABLED");
            run_program("/tmp/set_build_prop.sh", "persist.usb.notify", "1");
+   endif;
+endif;
+
+
+#####################
+## longpress volume key (screen off)
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.16") == "1"
+then
+   if
+       file_getprop("/tmp/aroma-data/volkey.prop","selected.0") == "1"
+   then
+       ui_print("|-> longpress volume key     	 NO_ACTIONS");
+           run_program("/tmp/tweaks.sh", "sys", "tweaks_volkey_media", "0");
+   else
+      if
+          file_getprop("/tmp/aroma-data/volkey.prop","selected.0") == "2"
+      then
+          ui_print("|-> longpress volume key     AMBIENT");
+              run_program("/tmp/tweaks.sh", "sys", "tweaks_volkey_media", "1");
+      endif;
+      if
+          file_getprop("/tmp/aroma-data/volkey.prop","selected.0") == "3"
+      then
+          ui_print("|-> longpress volume key     PLAY_SKIP");
+              run_program("/tmp/tweaks.sh", "sys", "tweaks_volkey_media", "2");
+      endif;
+      if
+          file_getprop("/tmp/aroma-data/volkey.prop","selected.0") == "4"
+      then
+          ui_print("|-> longpress volume key     SKIP_SKIP");
+              run_program("/tmp/tweaks.sh", "sys", "tweaks_volkey_media", "3");
+      endif;
+
+      package_extract_dir("additions/vol_key", "/system");
+      set_perm(0, 0, 0755, "/system/etc/init.d/50volkey");
    endif;
 endif;
 
@@ -394,7 +435,7 @@ endif;
 #####################
 
 if
-    file_getprop("/tmp/aroma-data/common.prop","item.0.15") == "1"
+    file_getprop("/tmp/aroma-data/common.prop","item.0.13") == "1"
 then
     ui_print("|-> increase volume steps     APPLIED");
     run_program("/tmp/tweaks.sh", "sys", "tweaks_volume_control", "1");

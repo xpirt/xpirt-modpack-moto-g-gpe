@@ -176,7 +176,8 @@ checkbox(
   "display DPI", "</b>submenu...</b>",0,
   "increase volume steps", "increase volume steps for media",1,
   "centered clock", "center clock in status bar",0,
-  "keyboard volume control", "keyboard left and right with volume keys",0
+  "keyboard volume control", "keyboard left and right with volume keys",0,
+  "longpress volume key (screen off)", "</b>submenu...</b>",1
 );
 
 
@@ -254,6 +255,22 @@ if prop("common.prop","item.0.5")=="1" then
   );
 endif;
 
+#longpress volume key
+if prop("common.prop","item.0.16")=="1" then
+    selectbox(
+      "longpress volume key (screen off)",
+      "please indicate:",
+      "icons/apps",
+      "volkey.prop",
+      
+      "no actions","",1,
+      "show ambient display","",0,
+      "Dwn play(pause)/Up skip to next","",0,
+      "Dwn skip to previous/Up skip to next","",0
+    );
+else
+    writetmpfile("volkey.prop", "selected.0=1\n");
+endif;
 
 ###################################################################################################################
 #
