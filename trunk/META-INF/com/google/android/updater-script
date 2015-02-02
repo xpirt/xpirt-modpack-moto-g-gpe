@@ -266,9 +266,6 @@ then
           ui_print("|-> longpress volume key     SKIP_SKIP");
               run_program("/tmp/tweaks.sh", "sys", "tweaks_volkey_media", "3");
       endif;
-
-      package_extract_dir("additions/vol_key", "/system");
-      set_perm(0, 0, 0755, "/system/etc/init.d/50volkey");
    endif;
 endif;
 
@@ -442,7 +439,6 @@ then
 else
     ui_print("|-> increase volume steps     DEACTIVATED");
     run_program("/tmp/tweaks.sh", "sys", "tweaks_volume_control", "0");
-
 endif;
 
 
