@@ -49,7 +49,7 @@ ini_set("force_colorspace","rgba");
 fontresload( "0", "ttf/DroidSans.ttf", "12" );
 fontresload( "1", "ttf/DroidSans.ttf", "18" );
 
-theme("sense");
+theme("material");
 
 ###################################################################################################################
 #
@@ -60,11 +60,11 @@ viewbox(
   #-- Text
     "Welcome",
     "\n\n\n\n\n"+
-    "You're about to flash:\n"+
+    "<#selectbg_g>You're about to flash:\n"+
     ini_get("rom_name") + " for " + ini_get("rom_device") +  "\n\n\n"+
-    "  VERSION\t: <b><#selectbg_g>"+ini_get("rom_version")+"</#></b>\n"+
-    "  UPDATED\t: <b><#selectbg_g>"+ini_get("rom_date")+"</#></b>\n\n\n"+
-    "Press <b>Next</b> to continue the installation...",
+    "  VERSION\t: <b>"+ini_get("rom_version")+"</b>\n"+
+    "  UPDATED\t: <b>"+ini_get("rom_date")+"</b>\n\n\n"+
+    "Press <b>Next</b> to continue the installation...</#>",
   #-- Icon
     "@welcome"
 );
