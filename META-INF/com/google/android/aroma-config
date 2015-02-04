@@ -177,7 +177,8 @@ checkbox(
   "increase volume steps", "increase volume steps for media",1,
   "centered clock", "center clock in status bar",0,
   "keyboard volume control", "keyboard left and right with volume keys",0,
-  "longpress volume key (screen off)", "</b>submenu...</b>",1
+  "longpress volume key (screen off)", "</b>submenu...</b>",1,
+  "system tweaks","</b>submenu...</b>",1
 );
 
 
@@ -270,6 +271,22 @@ if prop("common.prop","item.0.16")=="1" then
     );
 else
     writetmpfile("volkey.prop", "selected.0=1\n");
+endif;
+
+#select system.prop tweaks
+if prop("common.prop","item.0.17")=="1" then
+  checkbox(
+    "system.prop tweaks",
+    "please indicate:",
+    "@sysmod",
+    "system.prop",
+    
+    "hide alarm notify","",0
+    "hide bluetooth notify","",0,
+    "hide ime notify","",0,
+    "hide volume notify","",0,
+    "hide am/pm","",0
+  );
 endif;
 
 ###################################################################################################################
