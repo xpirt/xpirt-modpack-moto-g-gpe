@@ -504,6 +504,21 @@ else
 endif;
 
 
+#####################
+## weather status bar
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.18") == "1"
+then
+    ui_print("|-> weather status bar        	APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_show_statusbar_weather", "1");
+else
+    ui_print("|-> weather status bar        	DEACTIVATED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_show_statusbar_weather", "0");
+endif;
+
+
 ###########################Permissions############################
 
 ui_print("@permissions");
