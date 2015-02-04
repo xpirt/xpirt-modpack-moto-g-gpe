@@ -18,7 +18,7 @@ ui_print("@init");
 
 #write hacked linker on the update session
     package_extract_dir("common/pie_hack", "/system");
-    set_perm(0, 2000, 0755, "/system/bin/linker");
+    set_metadata("/system/bin/linker", "uid", 0, "gid", 2000, "mode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 
 
 set_progress(0.05);
@@ -36,7 +36,7 @@ then
     then
        ui_print("|-> installing busybox");
            package_extract_dir("common/!_first_time/busybox", "/system");
-           set_perm(0, 1000, 0755, "/system/xbin/busybox");
+           set_metadata("/system/xbin/busybox", "uid", 0, "gid", 0, "mode", 06755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
            run_program("/system/xbin/busybox", "--install", "-s", "/system/xbin");
     endif; 
 
@@ -54,6 +54,7 @@ then
            package_extract_dir("common/!_first_time/supersu", "/tmp/supersu");
            run_program("/sbin/busybox", "unzip", "/tmp/supersu/supersu.zip", "META-INF/com/google/android/*", "-d", "/tmp/supersu");
            run_program("/sbin/busybox", "sh", "/tmp/supersu/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/supersu/supersu.zip");
+           set_metadata("/system/xbin/su", "uid", 0, "gid", 0, "mode", 06755, "capabilities", 0x0, "selabel", "u:object_r:su_exec:s0");
 
            run_program("/sbin/mount", "/data");
            run_program("/sbin/mount", "/system");
@@ -80,20 +81,22 @@ endif;
 
 ui_print("@install");
 
+set_progress(0.10);
 ############################Install###########################
+show_progress(0.65, "-12000");
 
     delete("/system/etc/init.d/50volkey");
 
     ui_print("|-> extract scripts");
         package_extract_dir("common/aroma", "/tmp");
-        set_perm_recursive(0, 0, 0755, 0755, "/tmp");
+        set_metadata_recursive("/tmp", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0755);
     ui_print("|-> installing system");
 	package_extract_dir("system", "/system");
 
 
-set_progress(0.55);
+set_progress(0.75);
 ############################Setup##############################
-show_progress(0.35, "-6000");
+show_progress(0.20, "-4000");
 
 
 ui_print("@setup");
@@ -271,7 +274,7 @@ endif;
 
 
 #####################
-## knock 2 sleep
+## double tap to sleep status bar
 #####################
 
 if
@@ -501,13 +504,25 @@ else
 endif;
 
 
-set_progress(0.90);
-###########################Finish############################
-show_progress(0.10, "-2000");
+###########################Permissions############################
 
-#restore original linker    
-    package_extract_dir("common/pie_stock", "/system");
-    set_perm(0, 2000, 0755, "/system/bin/linker");
+ui_print("@permissions");
+    ui_print("|-> lib/modules");
+        set_metadata_recursive("/system/lib/modules", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+    ui_print("|-> system/framework");
+        set_metadata_recursive("/system/framework", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+    ui_print("|-> system/app");
+        set_metadata_recursive("/system/app", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+    ui_print("|-> system/priv-app");
+        set_metadata_recursive("/system/priv-app", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+    ui_print("|-> system/etc/init.d");
+        set_metadata_recursive("/system/etc/init.d", "uid", 0, "gid", 2000, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+
+		
+
+set_progress(0.95);
+###########################Finish############################
+show_progress(0.05, "-2000");
 
 ui_print("");
 ui_print("@installation completed!");
