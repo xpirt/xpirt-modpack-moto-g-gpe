@@ -282,7 +282,7 @@ if prop("common.prop","item.0.17")=="1" then
     "@sysmod",
     "system.prop",
     
-    "hide alarm notify","",0
+    "hide alarm notify","",0,
     "hide bluetooth notify","",0,
     "hide ime notify","",0,
     "hide volume notify","",0,
