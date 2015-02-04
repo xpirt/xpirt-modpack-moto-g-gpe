@@ -132,7 +132,7 @@ menubox(
   "Pure Stock Moto G 2013 GPE (without root)","Select if You flash this modPack first time","@default"
 );
 
-#wich way flash modPack
+#which way flash modPack
 if prop("way.prop","selected")=="1" then
     writetmpfile("prep.prop", "item.0.1=0\nitem.0.2=0\nitem.0.3=0\n");
 endif;
@@ -144,10 +144,10 @@ if prop("way.prop","selected")=="2" then
       "@apps",
       "prep.prop",
       
-      "install busybox","",0,
+      "install busybox","",1,
       "install init.d support","",1,
-      "install root","",0,
-      "wipe caches","",0
+      "install root","",1,
+      "wipe caches","",1
     );
 endif;
 
@@ -167,7 +167,7 @@ checkbox(
   "menu navbar persist","persistent menu button in navbar",0,
   "show battery %","percentage inside or beside battery",1,
   "build.prop tweaks","various build.prop tweaks",0,
-  "knock knock to sleep","double tab status bar to sleep",1,
+  "double tap to sleep","double tab status bar to sleep",1,
   "hide search bar in recents","hide search bar from recent apps",1,
   "disable safe volume", "disable safe volume warning",0,
   "right corner pulldown qs", "right status bar corner quick pulldown",1,
