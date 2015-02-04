@@ -178,7 +178,8 @@ checkbox(
   "centered clock", "center clock in status bar",0,
   "keyboard volume control", "keyboard left and right with volume keys",0,
   "longpress volume key (screen off)", "</b>submenu...</b>",1,
-  "system tweaks","</b>submenu...</b>",1
+  "system tweaks","</b>submenu...</b>",1,
+  "status bar weather","weather info on status bar panel",1
 );
 
 
