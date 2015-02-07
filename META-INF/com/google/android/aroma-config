@@ -179,7 +179,8 @@ checkbox(
   "keyboard volume control", "keyboard left and right with volume keys",0,
   "longpress volume key (screen off)", "</b>submenu...</b>",1,
   "system tweaks","</b>submenu...</b>",1,
-  "status bar weather","weather info on status bar panel",1
+  "status bar weather","weather info on status bar panel",1,
+  "disable wake on unplug","disable wake when unplugged phone",1
 );
 
 
