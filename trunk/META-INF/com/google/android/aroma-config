@@ -290,6 +290,59 @@ if prop("common.prop","item.0.17")=="1" then
   );
 endif;
 
+#hide network stats
+if prop("common.prop","item.0.10")=="1" then
+    selectbox(
+      "network stats hide",
+      "please indicate:",
+      "icons/apps",
+      "nshide.prop",
+      
+      "auto hide","hidden when no network (stock)",1,
+      "always visible","visible also when no network",0
+    );
+else
+    writetmpfile("nshide.prop", "selected.0=1\n");
+endif;
+
+#select network stats color
+if prop("common.prop","item.0.10")=="1" then
+    selectbox(
+      "network stats color",
+      "please indicate:",
+      "icons/apps",
+      "nscolor.prop",
+      
+      "don't change","",1,
+      "stock white","",0,
+      "blue","",0,
+      "pink","",0,
+      "red","",0,
+      "green","",0,
+      "yellow","",0
+    );
+else
+    writetmpfile("nscolor.prop", "selected.0=1\n");
+endif;
+
+#select network stats update interval
+if prop("common.prop","item.0.10")=="1" then
+    selectbox(
+      "network stats update interval",
+      "please indicate:",
+      "icons/apps",
+      "nsinterval.prop",
+      
+      "don't change","",1,
+      "0.5 seconds","",0,
+      "1 second","stock value",0,
+      "1.5 seconds","",0,
+      "2 seconds","",0
+    );
+else
+    writetmpfile("nsinterval.prop", "selected.0=1\n");
+endif;
+
 ###################################################################################################################
 #
 # STEP 5 - INSTALLING

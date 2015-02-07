@@ -427,10 +427,99 @@ endif;
 if
     file_getprop("/tmp/aroma-data/common.prop","item.0.10") == "1"
 then
-    ui_print("|-> speed meter status bar      APPLIED");
+    ui_print("|-> network stats status bar      APPLIED");
     	run_program("/tmp/tweaks.sh", "sys", "status_bar_network_stats", "1");
+	
+    ## hide
+    if
+        file_getprop("/tmp/aroma-data/nshide.prop","selected.0") == "1"
+    then
+        ui_print("|-> network stats         	AUTO_HIDE");
+            run_program("/tmp/tweaks.sh", "sys", "status_bar_network_hide", "1");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/nshide.prop","selected.0") == "2"
+    then
+        ui_print("|-> network stats           	ALWAYS_VISIBLE");
+            run_program("/tmp/tweaks.sh", "sys", "status_bar_network_hide", "0");
+    endif;
+	
+    ## color
+    if
+        file_getprop("/tmp/aroma-data/nscolor.prop","selected.0") == "1"
+    then
+        ui_print("|-> network stats color         NOT_CHANGED");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/nscolor.prop","selected.0") == "2"
+    then
+        ui_print("|-> network stats color         STOCK_WHITE");
+            run_program("/tmp/tweaks.sh", "sys", "status_bar_network_usage_color", "#FFFFFF");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/nscolor.prop","selected.0") == "3"
+    then
+        ui_print("|-> network stats color         BLUE");
+            run_program("/tmp/tweaks.sh", "sys", "status_bar_network_usage_color", "#3792B4");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/nscolor.prop","selected.0") == "4"
+    then
+        ui_print("|-> network stats color         PINK");
+            run_program("/tmp/tweaks.sh", "sys", "status_bar_network_usage_color", "#C46491");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/nscolor.prop","selected.0") == "5"
+    then
+        ui_print("|-> network stats color         RED");
+            run_program("/tmp/tweaks.sh", "sys", "status_bar_network_usage_color", "#BB1A34");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/nscolor.prop","selected.0") == "6"
+    then
+        ui_print("|-> network stats color         GREEN");
+            run_program("/tmp/tweaks.sh", "sys", "status_bar_network_usage_color", "#6EB827");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/nscolor.prop","selected.0") == "7"
+    then
+        ui_print("|-> network stats color         YELLOW");
+            run_program("/tmp/tweaks.sh", "sys", "status_bar_network_usage_color", "#E5BB26");
+    endif;
+	
+	
+    ## update interval
+    if
+        file_getprop("/tmp/aroma-data/nsinterval.prop","selected.0") == "1"
+    then
+        ui_print("|-> network stats update interval         NOT_CHANGED");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/nsinterval.prop","selected.0") == "2"
+    then
+        ui_print("|-> network stats update interval         0.5_SECONDS");
+            run_program("/tmp/tweaks.sh", "sys", "status_bar_network_stats_update_frequency", "500");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/nsinterval.prop","selected.0") == "3"
+    then
+        ui_print("|-> network stats update interval         1_SECOND");
+            run_program("/tmp/tweaks.sh", "sys", "status_bar_network_stats_update_frequency", "1000");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/nsinterval.prop","selected.0") == "4"
+    then
+        ui_print("|-> network stats update interval         1.5_SECONDS");
+            run_program("/tmp/tweaks.sh", "sys", "status_bar_network_stats_update_frequency", "1500");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/nsinterval.prop","selected.0") == "5"
+    then
+        ui_print("|-> network stats update interval         2_SECONDS");
+            run_program("/tmp/tweaks.sh", "sys", "status_bar_network_stats_update_frequency", "2000");
+    endif;
 else
-    ui_print("|-> speed meter status bar      DISABLED");
+    ui_print("|-> network stats status bar      DISABLED");
     	run_program("/tmp/tweaks.sh", "sys", "status_bar_network_stats", "0");
 endif;
 
