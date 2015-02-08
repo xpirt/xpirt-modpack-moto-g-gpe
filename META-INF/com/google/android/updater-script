@@ -623,6 +623,51 @@ else
 endif;
 
 
+#####################
+## volume panel timeout
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.20") == "1"
+then
+    if
+        file_getprop("/tmp/aroma-data/vtimeout.prop","selected.0") == "1"
+    then
+        ui_print("|-> volume panel timeout         		NOT_CHANGED");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/vtimeout.prop","selected.0") == "2"
+    then
+        ui_print("|-> volume panel timeout         		0.5_SECONDS");
+            run_program("/tmp/tweaks.sh", "sys", "tweaks_volume_panel_timeout", "500");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/vtimeout.prop","selected.0") == "3"
+    then
+        ui_print("|-> volume panel timeout           	1_SECOND");
+            run_program("/tmp/tweaks.sh", "sys", "tweaks_volume_panel_timeout", "1000");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/vtimeout.prop","selected.0") == "4"
+    then
+        ui_print("|-> volume panel timeout           	2_SECONDS");
+            run_program("/tmp/tweaks.sh", "sys", "tweaks_volume_panel_timeout", "2000");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/vtimeout.prop","selected.0") == "5"
+    then
+        ui_print("|-> volume panel timeout           	3_SECONDS");
+            run_program("/tmp/tweaks.sh", "sys", "tweaks_volume_panel_timeout", "3000");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/vtimeout.prop","selected.0") == "6"
+    then
+        ui_print("|-> volume panel timeout           	4_SECONDS");
+            run_program("/tmp/tweaks.sh", "sys", "tweaks_volume_panel_timeout", "4000");
+    endif;
+endif;
+
+
 ###########################Permissions############################
 
 ui_print("@permissions");
