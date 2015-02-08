@@ -668,6 +668,81 @@ then
 endif;
 
 
+#####################
+## heads up timeout
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.21") == "1"
+then
+    if
+        file_getprop("/tmp/aroma-data/htimeout.prop","selected.0") == "1"
+    then
+        ui_print("|-> heads up timeout         		NOT_CHANGED");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/htimeout.prop","selected.0") == "2"
+    then
+        ui_print("|-> heads up timeout         		1_SECOND");
+            run_program("/tmp/tweaks.sh", "sys", "tweaks_heads_up_timeout", "1000");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/htimeout.prop","selected.0") == "3"
+    then
+        ui_print("|-> heads up timeout           	2_SECONDS");
+            run_program("/tmp/tweaks.sh", "sys", "tweaks_heads_up_timeout", "2000");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/htimeout.prop","selected.0") == "4"
+    then
+        ui_print("|-> heads up timeout           	3_SECONDS");
+            run_program("/tmp/tweaks.sh", "sys", "tweaks_heads_up_timeout", "3000");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/htimeout.prop","selected.0") == "5"
+    then
+        ui_print("|-> heads up timeout           	4_SECONDS");
+            run_program("/tmp/tweaks.sh", "sys", "tweaks_heads_up_timeout", "4000");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/htimeout.prop","selected.0") == "6"
+    then
+        ui_print("|-> heads up timeout           	5_SECONDS");
+            run_program("/tmp/tweaks.sh", "sys", "tweaks_heads_up_timeout", "5000");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/htimeout.prop","selected.0") == "7"
+    then
+        ui_print("|-> heads up timeout           	6_SECONDS");
+            run_program("/tmp/tweaks.sh", "sys", "tweaks_heads_up_timeout", "6000");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/htimeout.prop","selected.0") == "8"
+    then
+        ui_print("|-> heads up timeout           	7_SECONDS");
+            run_program("/tmp/tweaks.sh", "sys", "tweaks_heads_up_timeout", "7000");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/htimeout.prop","selected.0") == "9"
+    then
+        ui_print("|-> heads up timeout           	8_SECONDS");
+            run_program("/tmp/tweaks.sh", "sys", "tweaks_heads_up_timeout", "8000");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/htimeout.prop","selected.0") == "10"
+    then
+        ui_print("|-> heads up timeout           	9_SECONDS");
+            run_program("/tmp/tweaks.sh", "sys", "tweaks_heads_up_timeout", "9000");
+    endif;
+    if
+        file_getprop("/tmp/aroma-data/htimeout.prop","selected.0") == "11"
+    then
+        ui_print("|-> heads up timeout           	10_SECONDS");
+            run_program("/tmp/tweaks.sh", "sys", "tweaks_heads_up_timeout", "10000");
+    endif;
+endif;
+
+
 ###########################Permissions############################
 
 ui_print("@permissions");
@@ -682,7 +757,6 @@ ui_print("@permissions");
     ui_print("|-> system/etc/init.d");
         set_metadata_recursive("/system/etc/init.d", "uid", 0, "gid", 2000, "dmode", 0755, "fmode", 0755, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
 
-		
 
 set_progress(0.95);
 ###########################Finish############################

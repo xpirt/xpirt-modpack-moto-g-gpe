@@ -355,10 +355,34 @@ if prop("common.prop","item.0.20")=="1" then
       
       "don't change","",1,
       "0.5 seconds","",0,
-      "1 second","stock value",0,
+      "1 second","",0,
       "2 seconds","",0,
-      "3 seconds","",0,
+      "3 seconds","stock value",0,
       "4 seconds","",0
+    );
+else
+    writetmpfile("vtimeout.prop", "selected.0=1\n");
+endif;
+
+#select heads up timeout
+if prop("common.prop","item.0.21")=="1" then
+	selectbox(
+      "heads up timeout",
+      "please indicate:",
+      "icons/apps",
+      "htimeout.prop",
+      
+      "don't change","",1,
+      "1 second","",0,
+      "2 seconds","",0,
+      "3 seconds","stock value",0,
+      "4 seconds","",0,
+      "5 seconds","",0,
+      "6 seconds","",0,
+      "7 seconds","",0,
+      "8 seconds","",0,
+      "9 seconds","",0,
+      "10 seconds","",0
     );
 else
     writetmpfile("vtimeout.prop", "selected.0=1\n");
