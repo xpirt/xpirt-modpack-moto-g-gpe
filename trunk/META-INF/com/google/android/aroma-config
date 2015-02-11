@@ -182,7 +182,8 @@ checkbox(
   "status bar weather","weather info on status bar panel",0,
   "disable wake on unplug","disable wake when unplugged phone",0,
   "volume panel timeout","</b>submenu...</b>",0,
-  "heads up timeout","</b>submenu...</b>",0
+  "heads up timeout","</b>submenu...</b>",0,
+  "volume change sound","enable sound when changing volume",0
 );
 
 
