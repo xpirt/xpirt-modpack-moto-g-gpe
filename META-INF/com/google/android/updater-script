@@ -743,6 +743,21 @@ then
 endif;
 
 
+#####################
+## volume change sound
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.22") == "1"
+then
+    ui_print("|-> volume change sound        	ENABLED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_volume_change_sound", "1");
+else
+    ui_print("|-> volume change sound        	DISABLED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_volume_change_sound", "0");
+endif;
+
+
 ###########################Permissions############################
 
 ui_print("@permissions");
