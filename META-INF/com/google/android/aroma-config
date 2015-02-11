@@ -171,7 +171,6 @@ checkbox(
   "hide search bar in recents","hide search bar from recent apps",0,
   "disable safe volume", "disable safe volume warning",0,
   "right corner pulldown qs", "right status bar corner quick pulldown",0,
-  "network stats statusbar", "status bar network stats ingoing/outgoing",0,
   "change navbar size","</b>submenu...</b>",0,
   "display DPI", "</b>submenu...</b>",0,
   "increase volume steps", "increase volume steps for media",0,
@@ -292,59 +291,6 @@ if prop("common.prop","item.0.17")=="1" then
     "hide volume notify","",0,
     "hide am/pm","",0
   );
-endif;
-
-#hide network stats
-if prop("common.prop","item.0.10")=="1" then
-    selectbox(
-      "network stats hide",
-      "please indicate:",
-      "icons/apps",
-      "nshide.prop",
-      
-      "auto hide","hidden when no network (stock)",1,
-      "always visible","visible also when no network",0
-    );
-else
-    writetmpfile("nshide.prop", "selected.0=1\n");
-endif;
-
-#select network stats color
-if prop("common.prop","item.0.10")=="1" then
-    selectbox(
-      "network stats color",
-      "please indicate:",
-      "icons/apps",
-      "nscolor.prop",
-      
-      "don't change","",1,
-      "stock white","",0,
-      "blue","",0,
-      "pink","",0,
-      "red","",0,
-      "green","",0,
-      "yellow","",0
-    );
-else
-    writetmpfile("nscolor.prop", "selected.0=1\n");
-endif;
-
-#select network stats update interval
-if prop("common.prop","item.0.10")=="1" then
-    selectbox(
-      "network stats update interval",
-      "please indicate:",
-      "icons/apps",
-      "nsinterval.prop",
-      
-      "don't change","",1,
-      "0.5 seconds","",0,
-      "1 second","stock value",0,
-      "1.5 seconds","",0,
-      "2 seconds","",0
-    );
-else
-    writetmpfile("nsinterval.prop", "selected.0=1\n");
 endif;
 
 #select volume panel timeout
