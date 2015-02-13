@@ -39,10 +39,10 @@
 #
 
 ini_set("rom_name",             "xpirt modPack");
-ini_set("rom_version",          "#2");
+ini_set("rom_version",          "#3");
 ini_set("rom_author",           "xpirt, lyapota");
 ini_set("rom_device",           "Moto G 2013 - GPE");
-ini_set("rom_date",             "February 7, 2015");
+ini_set("rom_date",             "February 13, 2015");
 
 ini_set("force_colorspace","rgba");
 
