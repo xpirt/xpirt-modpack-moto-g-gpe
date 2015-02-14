@@ -183,7 +183,8 @@ checkbox(
   "volume panel timeout","</b>submenu...</b>",0,
   "heads up timeout","</b>submenu...</b>",0,
   "volume change sound","enable sound when changing volume",0,
-  "colorful navbar","navbar changes color if statusbar does it too",0
+  "colorful navbar","navbar changes color if statusbar does it too",0,
+  "hide lockscreen carrier","hide lockscreen carrier label",0
 );
 
 
