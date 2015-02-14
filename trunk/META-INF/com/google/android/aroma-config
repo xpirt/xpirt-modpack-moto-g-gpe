@@ -186,7 +186,8 @@ checkbox(
   "colorful navbar","navbar changes color if statusbar does it too",0,
   "hide lockscreen carrier","hide lockscreen carrier label",0,
   "quick unlock","no need to press OK on pin & password",0,
-  "scramble pin","randomize pin numbers every unlock",0
+  "scramble pin","randomize pin numbers every unlock",0,
+  "disable heads up","disable heads up notifications",0
 );
 
 
