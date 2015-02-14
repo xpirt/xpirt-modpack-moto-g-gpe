@@ -668,6 +668,21 @@ then
 endif;
 
 
+#####################
+## hide lockscreen carrier
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.23") == "1"
+then
+    ui_print("|-> hide lockscreen carrier        	APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_hide_lockscreen_carrier", "1");
+else
+    ui_print("|-> hide lockscreen carrier        	DEACTIVATED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_hide_lockscreen_carrier", "0");
+endif;
+
+
 ###########################Permissions############################
 
 ui_print("@permissions");
