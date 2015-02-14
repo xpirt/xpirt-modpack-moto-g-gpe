@@ -713,6 +713,21 @@ else
 endif;
 
 
+#####################
+## disable heads up
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.26") == "1"
+then
+    ui_print("|-> disable heads up        		APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "heads_up_notifications_enabled", "0");
+else
+    ui_print("|-> disable heads up        		DEACTIVATED");
+    	run_program("/tmp/tweaks.sh", "sys", "heads_up_notifications_enabled", "1");
+endif;
+
+
 ###########################Permissions############################
 
 ui_print("@permissions");
