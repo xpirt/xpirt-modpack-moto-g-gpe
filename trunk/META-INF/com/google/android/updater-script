@@ -683,6 +683,36 @@ else
 endif;
 
 
+#####################
+## quick unlock
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.24") == "1"
+then
+    ui_print("|-> quick unlock        		ENABLED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_quick_unlock", "1");
+else
+    ui_print("|-> quick unlock        		DISABLED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_quick_unlock", "0");
+endif;
+
+
+#####################
+## scramble pin
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.25") == "1"
+then
+    ui_print("|-> scramble pin        		ENABLED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_scramble_pin", "1");
+else
+    ui_print("|-> scramble pin        		DISABLED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_scramble_pin", "0");
+endif;
+
+
 ###########################Permissions############################
 
 ui_print("@permissions");

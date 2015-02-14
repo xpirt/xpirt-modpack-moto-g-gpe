@@ -184,7 +184,9 @@ checkbox(
   "heads up timeout","</b>submenu...</b>",0,
   "volume change sound","enable sound when changing volume",0,
   "colorful navbar","navbar changes color if statusbar does it too",0,
-  "hide lockscreen carrier","hide lockscreen carrier label",0
+  "hide lockscreen carrier","hide lockscreen carrier label",0,
+  "quick unlock","no need to press OK on pin & password",0,
+  "scramble pin","randomize pin numbers every unlock",0
 );
 
 
