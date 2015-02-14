@@ -140,28 +140,28 @@ endif;
 ## navigation bar
 #####################
 if
+    file_getprop("/tmp/aroma-data/navbar.prop","selected.0") == "1"
+then
+    ui_print("|-> navbar stock size       	APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_navbar_height", "144");
+endif;
+if
     file_getprop("/tmp/aroma-data/navbar.prop","selected.0") == "2"
 then
-    ui_print("|-> navbar small size       APPLIED");
-	package_extract_dir("additions/navbar_42", "/tmp");
-    	run_program("/tmp/res_patch.sh", "/system/framework/framework-res.apk");
-        set_perm(0, 0, 0644, "/system/framework/framework-res.apk");
+    ui_print("|-> navbar small size       	APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_navbar_height", "126");
 endif;
 if
     file_getprop("/tmp/aroma-data/navbar.prop","selected.0") == "3"
 then
-    ui_print("|-> navbar smaller size     APPLIED");
-	package_extract_dir("additions/navbar_36", "/tmp");
-    	run_program("/tmp/res_patch.sh", "/system/framework/framework-res.apk");
-        set_perm(0, 0, 0644, "/system/framework/framework-res.apk");
+    ui_print("|-> navbar smaller size     	APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_navbar_height", "108");
 endif;
 if
     file_getprop("/tmp/aroma-data/navbar.prop","selected.0") == "4"
 then
-    ui_print("|-> navbar smallest size    APPLIED");
-	package_extract_dir("additions/navbar_32", "/tmp");
-    	run_program("/tmp/res_patch.sh", "/system/framework/framework-res.apk");
-        set_perm(0, 0, 0644, "/system/framework/framework-res.apk");
+    ui_print("|-> navbar smallest size    	APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_navbar_height", "96");
 endif;
 
 
