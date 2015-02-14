@@ -654,6 +654,20 @@ else
 endif;
 
 
+#####################
+## colorful navbar
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.22") == "1"
+then
+    ui_print("|-> colorful navbar        	APPLIED");
+	package_extract_dir("additions/colorful_navbar", "/tmp");
+    	run_program("/tmp/res_patch.sh", "/system/framework/framework-res.apk");
+        set_perm(0, 0, 0644, "/system/framework/framework-res.apk");
+endif;
+
+
 ###########################Permissions############################
 
 ui_print("@permissions");
