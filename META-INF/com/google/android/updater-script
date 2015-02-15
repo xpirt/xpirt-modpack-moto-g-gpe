@@ -728,6 +728,21 @@ else
 endif;
 
 
+#####################
+## enable all rotations
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/common.prop","item.0.27") == "1"
+then
+    ui_print("|-> enable all rotations        		APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_enable_all_rotations", "1");
+else
+    ui_print("|-> enable all rotations        		DEACTIVATED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_enable_all_rotations", "0");
+endif;
+
+
 ###########################Permissions############################
 
 ui_print("@permissions");

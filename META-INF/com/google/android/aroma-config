@@ -187,7 +187,8 @@ checkbox(
   "hide lockscreen carrier","hide lockscreen carrier label",0,
   "quick unlock","no need to press OK on pin & password",0,
   "scramble pin","randomize pin numbers every unlock",0,
-  "disable heads up","disable heads up notifications",0
+  "disable heads up","disable heads up notifications",0,
+  "enable all rotations","enable all rotations (0, 90, 180, 270)",0
 );
 
 
