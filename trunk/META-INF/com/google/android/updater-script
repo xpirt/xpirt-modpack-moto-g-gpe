@@ -743,11 +743,26 @@ else
 endif;
 
 
+#####################
+## systemui mods
+#####################
+
+if
+    file_getprop("/tmp/aroma-data/sysui.prop","item.0.1") == "1"
+then
+    ui_print("|-> 4 qs tiles        			APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_qs_four_columns", "1");
+else
+    ui_print("|-> 4 qs tiles        			DEACTIVATED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_qs_four_columns", "0");
+endif;
+
+
 ###########################Permissions############################
 
 ui_print("@permissions");
-    ui_print("|-> lib/modules");
-        set_metadata_recursive("/system/lib/modules", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+#    ui_print("|-> lib/modules");
+#        set_metadata_recursive("/system/lib/modules", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
     ui_print("|-> system/framework");
         set_metadata_recursive("/system/framework", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
     ui_print("|-> system/app");
