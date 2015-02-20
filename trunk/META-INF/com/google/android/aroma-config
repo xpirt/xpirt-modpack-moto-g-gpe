@@ -198,7 +198,8 @@ checkbox(
   "@apps",
   "sysui.prop",
   
-  "4 tiles per row","4 quick settings tiles per row, instead of 3",0
+  "4 tiles per row","4 quick settings tiles per row, instead of 3",0,
+  "auto collapse","auto collapse after toggling quick settings",0
 );
 
 
