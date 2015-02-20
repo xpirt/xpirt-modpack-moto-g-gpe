@@ -191,6 +191,16 @@ checkbox(
   "enable all rotations","enable all rotations (0, 90, 180, 270)",0
 );
 
+#Select systemui mods
+checkbox(
+  "systemui",
+  "please indicate:",
+  "@apps",
+  "sysui.prop",
+  
+  "4 tiles per row","4 quick settings tiles per row, instead of 3",0
+);
+
 
 ###################################################################################################################
 #
