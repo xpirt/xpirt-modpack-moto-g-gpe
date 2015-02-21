@@ -767,6 +767,16 @@ else
     	run_program("/tmp/tweaks.sh", "sys", "tweaks_qs_collapse_panel", "0");
 endif;
 
+if
+    file_getprop("/tmp/aroma-data/sysui.prop","item.0.3") == "1"
+then
+    ui_print("|-> enable vibration        			APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_qs_vibration_enabled", "1");
+else
+    ui_print("|-> enable vibration        			DEACTIVATED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_qs_vibration_enabled", "0");
+endif;
+
 
 ###########################Permissions############################
 
