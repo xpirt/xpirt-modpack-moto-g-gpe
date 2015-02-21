@@ -162,33 +162,27 @@ checkbox(
   "@apps",
   "common.prop",
   
-  "longpress back to kill","longpress back key to kill app",0,
-  "advanced power menu","reboot,recovery,hot-reboot,safemode,bootloader",0,
-  "menu navbar persist","persistent menu button in navbar",0,
-  "show battery %","percentage inside or beside battery",0,
-  "build.prop tweaks","various build.prop tweaks",0,
-  "double tap to sleep","double tab status bar to sleep",0,
-  "hide search bar in recents","hide search bar from recent apps",0,
-  "disable safe volume", "disable safe volume warning",0,
-  "right corner pulldown qs", "right status bar corner quick pulldown",0,
-  "change navbar size","</b>submenu...</b>",0,
-  "display DPI", "</b>submenu...</b>",0,
-  "increase volume steps", "increase volume steps for media",0,
-  "centered clock", "center clock in status bar",0,
-  "keyboard volume control", "keyboard left and right with volume keys",0,
-  "longpress volume key (screen off)", "</b>submenu...</b>",0,
-  "system tweaks","</b>submenu...</b>",0,
-  "status bar weather","weather info on status bar panel",0,
-  "disable wake on unplug","disable wake when unplugged phone",0,
-  "volume panel timeout","</b>submenu...</b>",0,
-  "heads up timeout","</b>submenu...</b>",0,
-  "volume change sound","enable sound when changing volume",0,
-  "colorful navbar","navbar changes color if statusbar does it too",0,
-  "hide lockscreen carrier","hide lockscreen carrier label",0,
-  "quick unlock","no need to press OK on pin & password",0,
-  "scramble pin","randomize pin numbers every unlock",0,
-  "disable heads up","disable heads up notifications",0,
-  "enable all rotations","enable all rotations (0, 90, 180, 270)",0
+  "longpress back to kill","longpress back key to kill app",0, #1
+  "advanced power menu","reboot,recovery,hot-reboot,safemode,bootloader",0, #2
+  "menu navbar persist","persistent menu button in navbar",0, #3
+  "build.prop tweaks","various build.prop tweaks",0, #4
+  "hide search bar in recents","hide search bar from recent apps",0, #5
+  "disable safe volume", "disable safe volume warning",0, #6
+  "change navbar size","</b>submenu...</b>",0, #7
+  "display DPI", "</b>submenu...</b>",0, #8
+  "increase volume steps", "increase volume steps for media",0, #9
+  "keyboard volume control", "keyboard left and right with volume keys",0, #10
+  "longpress volume key (screen off)", "</b>submenu...</b>",0, #11
+  "system tweaks","</b>submenu...</b>",0, #12
+  "disable wake on unplug","disable wake when unplugged phone",0, #13
+  "volume panel timeout","</b>submenu...</b>",0, #14
+  "heads up timeout","</b>submenu...</b>",0, #15
+  "volume change sound","enable sound when changing volume",0, #16
+  "colorful navbar","navbar changes color if statusbar does it too",0, #17
+  "hide lockscreen carrier","hide lockscreen carrier label",0, #18
+  "quick unlock","no need to press OK on pin & password",0, #19
+  "scramble pin","randomize pin numbers every unlock",0, #20
+  "enable all rotations","enable all rotations (0, 90, 180, 270)",0 #21
 );
 
 #Select systemui mods
@@ -197,10 +191,17 @@ checkbox(
   "please indicate:",
   "@apps",
   "sysui.prop",
-  
-  "4 tiles per row","4 quick settings tiles per row, instead of 3",0,
-  "auto collapse","auto collapse after toggling quick settings",0,
-  "enable vibration","vibrate when pressing status bar items",0
+
+  "show battery %","percentage inside or beside battery",0, #1
+  "double tap to sleep","double tab status bar to sleep",0, #2
+  "centered clock", "center clock in status bar",0, #3
+  "status bar weather","weather info on status bar panel",0, #4
+  "disable heads up","disable heads up notifications",0, #5
+  "4 tiles per row","4 quick settings tiles per row, instead of 3",0, #6
+  "auto collapse","auto collapse after toggling quick settings",0, #7
+  "enable vibration","vibrate when pressing status bar items",0, #8
+  "disable brightness slider","disable brightness slider on panel",0, #9
+  "quick pulldown", "right statusbar corner quick settings pulldown",0 #10
 );
 
 
@@ -210,7 +211,7 @@ checkbox(
 #
 
 # navbar size
-if prop("common.prop","item.0.10")=="1" then
+if prop("common.prop","item.0.7")=="1" then
   selectbox(
     "navbar size",
     "please indicate:",
@@ -227,7 +228,7 @@ else
 endif;
 
 #select dpi
-if prop("common.prop","item.0.11")=="1" then
+if prop("common.prop","item.0.8")=="1" then
   selectbox(
     "display dpi",
     "please indicate:",
@@ -248,7 +249,7 @@ else
 endif;
 
 # battery %
-if prop("common.prop","item.0.4")=="1" then
+if prop("sysui.prop","item.0.1")=="1" then
   selectbox(
     "battery %",
     "please indicate:",
@@ -264,7 +265,7 @@ else
 endif;
 
 #select build.prop tweaks
-if prop("common.prop","item.0.5")=="1" then
+if prop("common.prop","item.0.4")=="1" then
   checkbox(
     "build.prop tweaks",
     "please indicate:",
@@ -279,7 +280,7 @@ if prop("common.prop","item.0.5")=="1" then
 endif;
 
 #longpress volume key
-if prop("common.prop","item.0.15")=="1" then
+if prop("common.prop","item.0.11")=="1" then
     selectbox(
       "longpress volume key (screen off)",
       "please indicate:",
@@ -295,8 +296,8 @@ else
     writetmpfile("volkey.prop", "selected.0=1\n");
 endif;
 
-#select system.prop tweaks
-if prop("common.prop","item.0.16")=="1" then
+#select system tweaks
+if prop("common.prop","item.0.12")=="1" then
   checkbox(
     "system.prop tweaks",
     "please indicate:",
@@ -312,7 +313,7 @@ if prop("common.prop","item.0.16")=="1" then
 endif;
 
 #select volume panel timeout
-if prop("common.prop","item.0.19")=="1" then
+if prop("common.prop","item.0.14")=="1" then
 	selectbox(
       "volume panel timeout",
       "please indicate:",
@@ -331,7 +332,7 @@ else
 endif;
 
 #select heads up timeout
-if prop("common.prop","item.0.20")=="1" then
+if prop("common.prop","item.0.15")=="1" then
 	selectbox(
       "heads up timeout",
       "please indicate:",
