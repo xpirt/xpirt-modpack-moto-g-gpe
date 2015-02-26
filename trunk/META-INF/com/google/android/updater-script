@@ -773,6 +773,16 @@ else
     	run_program("/tmp/tweaks.sh", "sys", "tweaks_qs_pulldown", "0");
 endif;
 
+if
+    file_getprop("/tmp/aroma-data/sysui.prop","item.0.11") == "1"
+then
+    ui_print("|-> enable ticker				      APPLIED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_enable_ticker", "1");
+else
+    ui_print("|-> enable ticker				      DISABLED");
+    	run_program("/tmp/tweaks.sh", "sys", "tweaks_enable_ticker", "0");
+endif;
+
 
 ###########################Permissions############################
 
